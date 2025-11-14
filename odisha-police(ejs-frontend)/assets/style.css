@@ -1,0 +1,142 @@
+/* ===========================
+        GLOBAL DARK THEME
+   =========================== */
+body {
+    margin: 0;
+    padding: 0;
+    background: #0d1117;      /* Deep dark */
+    font-family: "Segoe UI", Roboto, sans-serif;
+    color: #e6e6e6;
+}
+
+header {
+    background: #111827;
+    padding: 20px;
+    text-align: center;
+    color: #ffffff;
+    border-bottom: 1px solid #1f2937;
+}
+
+h1 {
+    font-size: 26px;
+    letter-spacing: 1px;
+    font-weight: 600;
+}
+
+/* ===========================
+       FORM CONTAINER
+   =========================== */
+.form-container {
+    width: 90%;
+    max-width: 900px;
+    margin: 30px auto;
+    background: #161b22;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.4);
+    border: 1px solid #1f2937;
+}
+
+/* ===========================
+      LABEL + INPUT STYLING
+   =========================== */
+label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #c9d1d9;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 10px 12px;
+    background: #0f172a;
+    color: #e6e6e6;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: 0.2s;
+}
+
+input:focus,
+select:focus {
+    border-color: #3b82f6;
+    outline: none;
+    box-shadow: 0 0 6px rgba(59,130,246,0.6);
+}
+
+/* ===========================
+        DRIVE SECTIONS
+   =========================== */
+.drive-section {
+    display: none;
+    background: #1e293b;
+    padding: 18px;
+    border-radius: 12px;
+    border: 1px solid #334155;
+    margin-top: 22px;
+}
+
+.drive-section h3 {
+    color: #93c5fd;
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+/* ===========================
+           BUTTONS
+   =========================== */
+.btn {
+    margin-top: 25px;
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    background: #2563eb;   /* blue */
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.btn:hover {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+/* smooth transitions */
+* {
+    transition: all 0.2s ease-in-out;
+}
+/* Top Right Buttons */
+.top-right-buttons {
+    position: fixed;
+    top: 15px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    z-index: 999;
+}
+
+.top-right-buttons button {
+    background: #ffffff;
+    border: 1px solid #d0d0d0;
+    padding: 7px 14px;
+    font-size: 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    transition: 0.2s ease-in-out;
+}
+
+.top-right-buttons button:hover {
+    background: #f2f2f2;
+}

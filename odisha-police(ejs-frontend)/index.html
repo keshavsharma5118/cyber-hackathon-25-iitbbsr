@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Smart Police — SuperAdmin Command (Odisha)</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <!-- Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Roboto:wght@300;400;500&display=swap"
+      rel="stylesheet">
+
+    <!-- Leaflet -->
+    <link rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <!-- Chart.js -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="wrap">
+      <header>
+        <div class="left">
+
+          <div class="title">
+            <h1>UTKALA SHAKTI DASHBOARD</h1>
+            <p class="small">Control Room • Odisha Police — Progress View</p>
+          </div>
+        </div>
+        <div class="right">
+          <div class="dgp">
+            <img src="image.png" alt="DGP" />
+            <div style="text-align:right;">
+              <strong style="font-size:13px">DGP Yogesh Bahadur Khurania</strong>
+              <small class="small">CID HQ</small>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Left Section -->
+      <aside class="left">
+        <div class="panel snapshot-panel">
+          <div class="panel-header">
+            <strong>🟠 District Recognitions</strong>
+            <div class="small muted">Updated: <span id="upd">—</span></div>
+          </div>
+
+          <div class="snapshot-grid">
+            <div class="snapshot-card">
+              <div class="icon-wrap"><i class="fa-solid fa-bullseye"></i></div>
+              <div>
+                <div class="label">Total Recognitions</div>
+                <div class="value" id="v_total">0</div>
+              </div>
+            </div>
+
+            <div class="snapshot-card">
+              <div class="icon-wrap"><i class="fa-solid fa-city"></i></div>
+              <div>
+                <div class="label">Active Districts</div>
+                <div class="value" id="v_active">0</div>
+              </div>
+            </div>
+
+            <div class="snapshot-card">
+              <div class="icon-wrap"><i class="fa-solid fa-clock"></i></div>
+              <div>
+                <div class="label">Avg Eval Time (days)</div>
+                <div class="value" id="v_avg">0</div>
+              </div>
+            </div>
+
+            <div class="snapshot-card">
+              <div class="icon-wrap"><i
+                  class="fa-solid fa-shield-halved"></i></div>
+              <div>
+                <div class="label">Top Category</div>
+                <div class="value" id="v_top">—</div>
+              </div>
+            </div>
+          </div>
+
+          
+        </div>
+
+        <div class="panel" style="padding:0; overflow:hidden;">
+         <div class="top-officers-panel">
+  <div class="panel-header">
+    <div>
+      <h3>🏅 Top Officers (Recent)</h3>
+      <p class="panel-subtext">Recognizing exceptional service and leadership</p>
+    </div>
+  </div>
+
+  <div class="officer-list">
+    <div class="officer-card">
+      <div class="rank">#1</div>
+      <div class="officer-info">
+        <strong>SP R. N. Mohanty</strong>
+        <span>Cyber Crime Division</span>
+      </div>
+      <div class="points">982 pts</div>
+    </div>
+
+    <div class="officer-card">
+      <div class="rank">#2</div>
+      <div class="officer-info">
+        <strong>DSP A. Das</strong>
+        <span>Coastal Security Unit</span>
+      </div>
+      <div class="points">941 pts</div>
+    </div>
+
+    <div class="officer-card">
+      <div class="rank">#3</div>
+      <div class="officer-info">
+        <strong>Inspector S. Nayak</strong>
+        <span>Traffic Management</span>
+      </div>
+      <div class="points">917 pts</div>
+    </div>
+
+    <div class="officer-card">
+      <div class="rank">#4</div>
+      <div class="officer-info">
+        <strong>SI P. Sahoo</strong>
+        <span>Surveillance Task Force</span>
+      </div>
+      <div class="points">890 pts</div>
+    </div>
+  </div>
+</div>
+
+          <div class="list" id="officerList"></div>
+        </div>
+      </aside>
+
+      <!-- Center Map -->
+      <section class="map-wrap panel">
+        <div class="map-top">
+          <div class="control"><strong id="mapTitle">ODISHA — Performance
+              Heatmap</strong></div>
+          <div class="control small muted">Category filter:
+            <select id="mapFilter">
+              <option value="all">All</option>
+              <option value="Crime">Crime</option>
+              <option value="Cyber Crime">Cyber</option>
+              <option value="Rescue">Rescue</option>
+              <option value="Community Work">Community</option>
+            </select>
+          </div>
+          <div class="control"><button class="btn"
+              id="downloadSnapshot">Snapshot</button></div>
+        </div>
+        <div id="map"></div>
+        <div class="pulse" aria-hidden="true"></div>
+
+        <div class="map-legend" id="mapLegend" title="Performance legend">
+          <div class="row"><span class="sw"
+              style="background:#2ecc71"></span><div>Excellent
+              (80–100)</div></div>
+          <div class="row"><span class="sw"
+              style="background:#f1c40f"></span><div>Good (60–79)</div></div>
+          <div class="row"><span class="sw"
+              style="background:#e67e22"></span><div>Moderate
+              (40–59)</div></div>
+          <div class="row"><span class="sw"
+              style="background:#e74c3c"></span><div>Needs Improvement
+              (0–39)</div></div>
+        </div>
+      </section>
+
+      <!-- Right Section -->
+      <aside class="right">
+       <div class="panel crime-leaderboard-panel">
+  <div class="card-title">
+    <strong>Top Districts by Crime Type</strong>
+  </div>
+
+  <div class="crime-leaderboard" id="crimeLeaderboard"></div>
+</div>
+
+
+
+<!-- === NEW PANEL: Form Buttons === -->
+<div class="panel" id="formButtonsPanel">
+  <div class="card-title"><strong>Forms</strong></div>
+
+  <div class="form-btn-box">
+    <button class="btn form-btn" id="openForm1" onclick="location.href='form1.html'">Form-1</button>
+    <button class="btn form-btn" id="openForm2" onclick="location.href='form2.html'">Form-2</button>
+  </div>
+</div>
+
+        <div class="panel">
+          <div class="card-title"><strong>Automated Insights</strong><div
+              class="small muted">Real-time observations</div></div>
+          <div id="insights"></div>
+        </div>
+      </aside>
+    </div>
+
+
+
+
+    <!-- ======================= MODAL POPUP ======================= -->
+<div id="formModal" class="modal-overlay">
+  <div class="modal-box">
+      <button class="close-modal" id="closeModal">&times;</button>
+      <div id="modalContent"></div>
+  </div>
+</div>
+
+<style>
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+.modal-box {
+  background: white;
+  width: 80%;
+  height: 90vh;
+  overflow-y: auto;
+  border-radius: 12px;
+  padding: 20px;
+  position: relative;
+}
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 28px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+</style>
+
+
+    <!-- lightweight libs for snapshot -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+  </body>
+</html>

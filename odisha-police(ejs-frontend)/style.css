@@ -1,0 +1,597 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  background: #0b1119;
+  color: #f1f1f1;
+  font-size: 14px;
+  overflow: hidden;
+}
+
+.wrap {
+  display: grid;
+  grid-template-columns: 320px 1fr 320px;
+  grid-template-rows: auto 1fr;
+  height: 100vh;
+  grid-template-areas:
+    "header header header"
+    "aside-left map aside-right";
+}
+
+header {
+  grid-area: header;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #101820;
+  padding: 12px 20px;
+  border-bottom: 1px solid #222;
+}
+
+header .logo {
+  background: #e74c3c;
+  padding: 8px 10px;
+  font-weight: 700;
+  font-size: 18px;
+  border-radius: 4px;
+}
+
+header .title h1 {
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+header .title p {
+  font-size: 12px;
+  color: #aaa;
+}
+
+header .dgp img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+header .dgp {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+aside.left, aside.right, section.map-wrap {
+  padding: 12px;
+  overflow: auto;
+}
+
+aside.left { grid-area: aside-left; background: #0f1621; }
+aside.right { grid-area: aside-right; background: #0f1621; }
+section.map-wrap { grid-area: map; position: relative; }
+
+.panel {
+  background: #151d28;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+}
+
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.kpi {
+  background: #1b2736;
+  border-radius: 8px;
+  padding: 8px;
+  text-align: center;
+}
+
+.kpi .info {
+  font-size: 12px;
+  color: #bbb;
+}
+
+.kpi .value {
+  font-size: 20px;
+  font-weight: 600;
+  color: #00d1ff;
+}
+
+.mini-chart {
+  width: 100%;
+  height: 80px;
+}
+
+.list {
+  max-height: 180px;
+  overflow-y: auto;
+  border-top: 1px solid #222;
+}
+
+.list .row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-bottom: 1px solid #222;
+}
+
+.list .row:hover {
+  background: #1b2736;
+}
+
+.map-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 8px;
+}
+
+.map-wrap #map {
+  height: calc(100% - 40px);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.map-legend {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: rgba(21, 29, 40, 0.9);
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.map-legend .row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sw {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
+}
+
+.btn {
+  background: #00d1ff;
+  color: #000;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn.alt {
+  background: #1b2736;
+  color: #00d1ff;
+}
+
+.btn:hover {
+  opacity: 0.9;
+}
+
+.leaderboard {
+  max-height: 240px;
+  overflow-y: auto;
+}
+
+.leaderboard .row {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-bottom: 1px solid #222;
+}
+
+.card-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.muted {
+  color: #777;
+}
+
+.small {
+  font-size: 12px;
+}
+
+.pulse {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #00d1ff;
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+  top: 10px;
+  right: 10px;
+  opacity: 0.3;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.4; }
+  50% { transform: scale(1.3); opacity: 0.1; }
+  100% { transform: scale(1); opacity: 0.4; }
+}
+
+.leaflet-marker-icon {
+  filter: drop-shadow(0 0 6px rgba(0,255,153,0.7));
+}
+
+
+/* --- Snapshot Panel Styling --- */
+.snapshot-panel {
+  background: #1a1f2c;
+  border: 1px solid #ff9f43;
+  box-shadow: 0 0 10px rgba(255, 159, 67, 0.4);
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  font-family: "Rajdhani", sans-serif;
+  font-weight: 600;
+  color: #ff9f43;
+}
+
+.snapshot-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.snapshot-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #222b3a;
+  padding: 10px;
+  border-radius: 8px;
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.snapshot-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 12px rgba(255, 159, 67, 0.3);
+}
+
+.icon-wrap {
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 159, 67, 0.2);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ff9f43;
+  font-size: 18px;
+}
+
+.snapshot-card .label {
+  font-size: 12px;
+  color: #aaa;
+}
+
+.snapshot-card .value {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffb84d;
+}
+
+.trend-wrap {
+  margin-top: 14px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 159, 67, 0.3);
+}
+
+/* 🚫 Completely remove any scrollbars from the left sidebar */
+aside.left {
+  overflow: hidden !important;
+}
+
+/* 🧱 Prevent child panels from forcing scrollbars */
+aside.left * {
+  overflow: visible !important;
+}
+
+/* 💡 Just in case the page itself has an unwanted scroll */
+html, body {
+  overflow: hidden;
+}
+
+
+/* --- Top Officers Panel --- */
+.top-officers-panel {
+  background: linear-gradient(145deg, #0a0a0a, #111827);
+  border-radius: 16px;
+  padding: 16px 20px;
+  box-shadow: 0 0 18px rgba(0, 191, 255, 0.1);
+  transition: all 0.3s ease-in-out;
+}
+
+.top-officers-panel:hover {
+  box-shadow: 0 0 22px rgba(0, 191, 255, 0.2);
+}
+
+.top-officers-panel .panel-header {
+  text-align: left;
+  border-bottom: 1px solid rgba(0, 191, 255, 0.2);
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.top-officers-panel h3 {
+  color: #00bfff;
+  font-weight: 700;
+  margin: 0;
+  font-family: 'Rajdhani', sans-serif;
+  letter-spacing: 0.5px;
+}
+
+.top-officers-panel .panel-subtext {
+  font-size: 13px;
+  color: #a0aec0;
+}
+
+/* Officer list */
+.officer-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255,255,255,0.04);
+  border-radius: 12px;
+  padding: 10px 14px;
+  margin: 8px 0;
+  transition: all 0.3s ease;
+}
+
+.officer-card:hover {
+  background: rgba(0,191,255,0.1);
+  transform: translateY(-2px);
+}
+
+.officer-card .rank {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #ffd700;
+  margin-right: 10px;
+}
+
+.officer-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.officer-info strong {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.officer-info span {
+  color: #9ca3af;
+  font-size: 12px;
+}
+
+.officer-card .points {
+  color: #00bfff;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+
+
+/* Clean, no-scroll leaderboard */
+.leaderboard-panel {
+  background: linear-gradient(145deg, #0b0b0b, #111827);
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 0 18px rgba(0, 191, 255, 0.15);
+}
+
+.leaderboard-header {
+  border-bottom: 1px solid rgba(0, 191, 255, 0.2);
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+}
+
+.leaderboard-header h3 {
+  font-family: 'Rajdhani', sans-serif;
+  color: #00bfff;
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.crime-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: hidden; /* prevents scrollbar */
+}
+
+.crime-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(0,191,255,0.1);
+  padding: 10px 14px;
+  border-radius: 10px;
+  transition: background 0.25s ease;
+}
+
+.crime-item:hover {
+  background: rgba(0,191,255,0.08);
+  transform: translateY(-1px);
+}
+
+.district-name {
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.3px;
+}
+
+.crime-type {
+  color: #00bfff;
+  font-weight: 600;
+  font-size: 14px;
+  text-transform: capitalize;
+}
+
+/* === CRIME LEADERBOARD PANEL === */
+.crime-leaderboard-panel {
+  background: linear-gradient(145deg, #1a0f0f, #1b1b1b);
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(255, 69, 0, 0.15);
+  padding: 16px;
+  color: #fff;
+}
+
+.crime-leaderboard-panel .card-title {
+  border-bottom: 1px solid rgba(255, 69, 0, 0.3);
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+  color: #ff6347;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.crime-leaderboard {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.crime-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 69, 0, 0.07);
+  border-left: 4px solid #ff4500;
+  padding: 10px 14px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.crime-row:hover {
+  background: rgba(255, 69, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.crime-row .district {
+  font-weight: 600;
+  color: #ffd1b3;
+  font-size: 14px;
+}
+
+.crime-row .crime-type {
+  background: linear-gradient(90deg, #ff6347, #ff8c00);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: capitalize;
+  box-shadow: 0 0 10px rgba(255, 69, 0, 0.3);
+}
+
+/* === AUTOMATED INSIGHTS PANEL === */
+.panel {
+  background: linear-gradient(145deg, #101417, #0a0d0f);
+  border-radius: 14px;
+  box-shadow: 0 0 18px rgba(0, 180, 255, 0.08);
+  padding: 16px;
+  color: #e6f1ff;
+  transition: all 0.3s ease;
+}
+
+.panel:hover {
+  box-shadow: 0 0 25px rgba(0, 180, 255, 0.15);
+  transform: translateY(-2px);
+}
+
+.card-title {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.card-title strong {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #00b4ff;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(0, 180, 255, 0.4);
+}
+
+.card-title .small.muted {
+  color: #8eaac6;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  margin-top: 3px;
+}
+
+/* === INSIGHTS CONTENT === */
+#insights {
+  background: rgba(0, 180, 255, 0.05);
+  border: 1px solid rgba(0, 180, 255, 0.15);
+  border-radius: 10px;
+  padding: 12px;
+  min-height: 80px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.9rem;
+  color: #eaf6ff;
+  line-height: 1.5;
+  box-shadow: inset 0 0 10px rgba(0, 180, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+#insights:hover {
+  background: rgba(0, 180, 255, 0.08);
+  box-shadow: inset 0 0 14px rgba(0, 180, 255, 0.1);
+}
+
+.leaflet-interactive {
+  animation: borderGlow 2s infinite alternate;
+}
+
+@keyframes borderGlow {
+  from { stroke: #00bfff; stroke-width: 2; }
+  to { stroke: #66e0ff; stroke-width: 3; }
+}
+
+
+
+  #formButtonsPanel .form-btn-box {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  #formButtonsPanel .form-btn {
+    flex: 1;
+    padding: 8px;
+    cursor: pointer;
+  }

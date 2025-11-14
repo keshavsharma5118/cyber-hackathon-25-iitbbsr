@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Conviction Dashboard</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #0d1117;
+            color: #d0d7de;
+            margin: 0;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            color: #58a6ff;
+        }
+
+        .filter-box {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            justify-content: center;
+        }
+
+        select, input {
+            padding: 10px;
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            color: #fff;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            backdrop-filter: blur(6px);
+        }
+
+        .card h2 {
+            color: #79c0ff;
+            margin-bottom: 10px;
+        }
+
+        .row {
+            margin: 5px 0;
+            border-bottom: 1px solid #30363d;
+            padding-bottom: 4px;
+        }
+
+        .remarks {
+            background: #161b22;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 6px;
+            border: 1px solid #30363d;
+            color: #c9d1d9;
+        }
+
+        .no-data {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 40px;
+            color: #8b949e;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #238636;
+            border: none;
+            color: #fff;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #2ea043;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Monthly Conviction Summary</h1>
+</header>
+
+<div class="filter-box">
+    <select id="districtFilter">
+        <option value="">All Districts</option>
+        <option>Cuttack</option>
+        <option>Bhubaneswar</option>
+        <option>Balasore</option>
+        <option>Rourkela</option>
+    </select>
+
+    <input type="month" id="monthFilter">
+
+    <button onclick="loadConvictions()">Search</button>
+</div>
+
+<div id="results"></div>
+
+<script>
+    async function loadConvictions() {
+        const district = document.getElementById("districtFilter").value;
+        const month = document.getElementById("monthFilter").value;
+
+        let url = "http://localhost:8000/api/convictions?";
+        if (district) url += `district=${district}&`;
+        if (month) url += `month=${month}&`;
+
+        const resultsBox = document.getElementById("results");
+        resultsBox.innerHTML = `<p class='no-data'>Loading...</p>`;
+
+        const res = await fetch(url);
+        const data = await res.json();
+
+        if (!data.success || data.data.length === 0) {
+            resultsBox.innerHTML = `<p class="no-data">No records found</p>`;
+            return;
+        }
+
+        resultsBox.innerHTML = "";
+
+        data.data.forEach(entry => {
+            const div = document.createElement("div");
+            div.className = "card";
+
+            let html = `
+                <h2>${entry.district} — ${entry.month}</h2>
+                <div><strong>Created:</strong> ${new Date(entry.createdAt).toLocaleString()}</div>
+                <br>
+            `;
+
+            Object.keys(entry.data).forEach(key => {
+                html += `
+                    <div class="row">
+                        <strong>${key.replace(/_/g, " ").toUpperCase()}:</strong> ${entry.data[key]}
+                    </div>
+                `;
+            });
+
+            if (entry.remarks) {
+                html += `<div class="remarks"><strong>Remarks:</strong> ${entry.remarks}</div>`;
+            }
+
+            div.innerHTML = html;
+            resultsBox.appendChild(div);
+        });
+    }
+
+    loadConvictions();
+</script>
+
+</body>
+</html>
