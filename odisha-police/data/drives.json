@@ -1,0 +1,22 @@
+[
+    {
+        "district": "Cuttack",
+        "driveType": "Illegal Firearms",
+        "startDate": "2025-11-01",
+        "endDate": "2025-11-03",
+        "arrests": "4",
+        "cases": "3",
+        "seizure": "45000",
+        "notes": "2 pistols and 20 rounds."
+    },
+    {
+        "district": "Bhubaneswar",
+        "driveType": "Drugs & Narcotics",
+        "startDate": "2025-11-02",
+        "endDate": "2025-11-02",
+        "arrests": "6",
+        "cases": "5",
+        "seizure": "120000",
+        "notes": "Ganja seizure 12kg."
+    }
+]

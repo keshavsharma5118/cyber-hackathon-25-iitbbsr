@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form 2 – Monthly Performance Summary</title>
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header>
+    <h1>Form 2 – Monthly Conviction Summary</h1>
+</header>
+
+<div class="form-container">
+
+    <form id="form2">
+
+        <!-- DISTRICT -->
+        <label>District:</label>
+        <select id="district2" required>
+            <option value="">Select District</option>
+            <option>Cuttack</option>
+            <option>Bhubaneswar</option>
+            <option>Balasore</option>
+            <option>Rourkela</option>
+        </select>
+
+        <!-- MONTH -->
+        <label>Month:</label>
+        <input type="month" id="month" required>
+
+
+
+
+        <!-- ======================== IPC / BNS ======================== -->
+        <div class="section-box">
+            <h3>IPC / BNS Convictions</h3>
+
+            <label>Total IPC/BNS Cases:</label>
+            <input type="number" id="ipc_total">
+
+            <label>Trial Completed:</label>
+            <input type="number" id="ipc_trial">
+
+            <label>Convictions:</label>
+            <input type="number" id="ipc_convictions">
+
+            <label>Acquittals:</label>
+            <input type="number" id="ipc_acquittals">
+        </div>
+
+
+
+
+        <!-- ======================== SLL ======================== -->
+        <div class="section-box">
+            <h3>SLL Convictions</h3>
+
+            <label>Total SLL Cases:</label>
+            <input type="number" id="sll_total">
+
+            <label>SLL Convictions:</label>
+            <input type="number" id="sll_convictions">
+        </div>
+
+
+
+
+        <!-- ======================== Non-MV ======================== -->
+        <div class="section-box">
+            <h3>Non-MV Convictions</h3>
+
+            <label>Total Non-MV Cases:</label>
+            <input type="number" id="nonmv_total">
+
+            <label>Convictions:</label>
+            <input type="number" id="nonmv_convictions">
+        </div>
+
+
+
+
+        <!-- ======================== Drunken Driving ======================== -->
+        <div class="section-box">
+            <h3>Drunken Driving Convictions</h3>
+
+            <label>Total Cases:</label>
+            <input type="number" id="dd_total">
+
+            <label>Convictions:</label>
+            <input type="number" id="dd_convictions">
+        </div>
+
+
+
+
+        <!-- ======================== Speedy Trial ======================== -->
+        <div class="section-box">
+            <h3>Convictions Through Speedy Trial</h3>
+
+            <label>Case Number:</label>
+            <input type="text" id="speedy_case">
+
+            <label>Judgement Date:</label>
+            <input type="date" id="speedy_date">
+
+            <label>Punishment Awarded:</label>
+            <input type="text" id="speedy_punishment">
+        </div>
+
+
+
+
+        <!-- REMARKS -->
+        <label>Remarks:</label>
+        <textarea id="remarks" rows="3"></textarea>
+
+        <button type="submit" class="btn">Submit</button>
+
+    </form>
+
+</div>
+
+<script src="assets/script.js"></script>
+
+<style>
+.section-box {
+    padding: 15px;
+    margin-top: 20px;
+    border: 1px solid #ccc;
+    background: #f8faff;
+    border-radius: 10px;
+}
+.section-box h3 {
+    margin-bottom: 10px;
+    color: #002b5c;
+}
+</style>
+
+</body>
+</html>

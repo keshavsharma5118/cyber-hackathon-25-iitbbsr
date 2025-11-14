@@ -1,0 +1,18 @@
+[
+    {
+        "district": "Cuttack",
+        "month": "2025-11",
+        "convictions": "12",
+        "acquittals": "2",
+        "detections": "Detected 2 major robbery cases.",
+        "remarks": "Good performance."
+    },
+    {
+        "district": "Bhubaneswar",
+        "month": "2025-11",
+        "convictions": "18",
+        "acquittals": "3",
+        "detections": "Detected narcotic smuggling case.",
+        "remarks": "Excellent performance."
+    }
+]
